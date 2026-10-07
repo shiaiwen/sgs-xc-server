@@ -7,7 +7,10 @@ import { createVersionRoutes } from './version/routes.js';
 const app = new Hono();
 const port = Number(process.env.PORT) || 8787;
 
-app.use('*', cors());
+app.use('*', cors({
+  origin: (origin) => origin || '*',
+  credentials: true
+}));
 
 app.get('/health', (context) => context.json({ ok: true }));
 
